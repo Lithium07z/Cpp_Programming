@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Power
+{
+    int kick, punch;
+
+public:
+    Power(int kick = 0, int punch = 0)
+    {
+        this->kick = kick;
+        this->punch = punch;
+    }
+    void show(string obj);
+    Power operator+(const Power &op2); //+ 연산자 함수 선언, Power op2로 해도 됨
+};
+void Power::show(string obj)
+{
+    cout << obj << ") kick=" << kick << ',' << "punch=" << punch << endl;
+}
+
+Power Power::operator+(const Power &op2)
+{
+    return Power(this->kick + op2.kick, this->punch + op2.punch);
+}
+
+//+ 연산자 멤버 함수 구현
+//Power Power::operator+(const Power &op2)
+//{
+//    Power tmp;                           // 임시 객체 생성
+//    tmp.kick = this->kick + op2.kick;    // kick 더하기
+//    tmp.punch = this->punch + op2.punch; // punch 더하기
+//   return tmp;                          // 더한 결과 리턴
+//}
+
+int main()
+{
+    Power a(3, 5), b(4, 6), c;
+    // 객체 a의 operator+() 멤버 함수 호출
+    c = a + b; //파워 객체 + 연산
+    a.show("a");
+    b.show("b");
+    c.show("c");
+}
